@@ -46,18 +46,15 @@ class ProcessorImitation:
         self.output()
         
     def mod(self, reg1, reg2, reg3):
-        if self.d[reg1][2] == '1' or self.d[reg2][2] == '1':
-            self.d[reg3] = self.twos_complement(divmod(int(self.d[reg1], 2) - 1, int(self.d[reg2], 2))[1], self.n_bits)
-        else:
-            self.d[reg3] = self.twos_complement(divmod(int(self.d[reg1], 2), int(self.d[reg2], 2))[1], self.n_bits)
+        self.d[reg3] = self.twos_complement(divmod(int(self.d[reg1], 2), int(self.d[reg2], 2))[1], self.n_bits)
         self.d['TC'] = self.d['TC'] % 2 + 1
         self.d['PS'] = self.d[reg3][2]
         self.output()
 
 proc_imit = ProcessorImitation(24)
-proc_imit.set_ir('mov R1, -55')
-proc_imit.mov('R1', -55)
-proc_imit.set_ir('mov R2, 24')
-proc_imit.mov('R2', 24)
+proc_imit.set_ir('mov R1, 1256')
+proc_imit.mov('R1', 1256)
+proc_imit.set_ir('mov R2, 317')
+proc_imit.mov('R2', 317)
 proc_imit.set_ir('R1 mod R2')
 proc_imit.mod('R1', 'R2', 'R3')
